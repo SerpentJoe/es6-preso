@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ES6: Slings And Fat Arrows</title>
+
+		<meta name="description" content="ES6 basics">
+		<meta name="author" content="Peter Jones">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+            <style>
+                .reveal abbr {
+                    border-bottom : 1px dashed rgb(127, 255, 127);
+                }
+                .reveal .js-code {
+                    font-family : Courier New, monospace;
+                    text-transform : none;
+                }
+                .reveal .chapter-pic {
+                    max-height : 400px;
+                }
+                .reveal blockquote[cite]::after {
+                    content    : '- ' attr(cite);
+                    position   : absolute;
+                    bottom     : 0;
+                    left       : 0;
+                    right      : 0;
+                    font-size  : .8em;
+                    text-align : right;
+                    -webkit-transform : translate(0, 100%) translate(0, .5em);
+                       -moz-transform : translate(0, 100%) translate(0, .5em);
+                            transform : translate(0, 100%) translate(0, .5em);
+                }
+                .reveal code {
+                    min-width : 720px;
+                }
+            </style>
+
+            <!--
+            OUTLINE
+
+            
+            -->
+
+			<div class="slides">
+				<section>
+					<h1>ES6</h1>
+					<h3>Slings And Fat Arrows</h3>
+					<p>
+						<small>Peter Jones for Big Fish Games</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>What is ES6?</h2>
+					<ul>
+                        <li>
+                            The ECMAScript version after 5
+                            <ul>
+                                <li class="fragment">'use strict';</li>
+                                <li class="fragment">Object.defineProperty</li>
+                                <li class="fragment">JSON.parse</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            ECMAScript is Javascript
+                        </li>
+                        <li class="fragment">
+                            Blame Microsoft
+                        </li>
+					</ul>
+				</section>
+
+                <section>
+                    <h2>ES6 contains three types of changes</h2>
+                    <ul>
+                        <li>
+                            Huge epic changes! (Proxy, generators, Symbols)
+                        </li>
+                        <li>
+                            Minor syntactic polish (Fat arrow, classes, template strings)
+                        </li>
+                        <li>
+                            Not even that (Promise, Reflect, Array/String methods)
+                        </li>
+                    </ul>
+                </section>
+
+				<section>
+					<h1>Things you'll see a lot</h1>
+				</section>
+
+				<section>
+                    <section>
+                        <h2>Template strings</h2>
+                        <ul>
+                            <li>Javascript strings look like <span class="js-code">'this'</span> or <span class="js-code">"this"</span></li>
+                            <li>
+                                Now they can also look like <span class="js-code">`this`</span>!</li>
+                                <pre><code data-trim class="javascript">
+var example = `She said "I'm a string" to him`;
+                                </code></pre>
+                            </li>
+                            <li class="fragment">Why bother?</li>
+                            <li class="fragment">
+                                Linebreaks permitted
+                                <pre><code data-trim class="javascript">
+// Linebreaks in normal strings
+var html = '<div>\n\
+    <p>Testing</p>\n\
+</div>';
+
+// Linebreaks in template strings
+var html = `<div>
+    <p>Testing</p>
+</div>`;
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Template strings</h2>
+                        <ul>
+                            <li>
+                                More importantly, templating
+                                <pre><code data-trim class="javascript">
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                Allows arbitrary operations
+                                <pre><code data-trim class="javascript">
+function greet(names) {
+    return `Hello, ${names.join(', ')}!`;
+}
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Fat arrow functions</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// Instead of this ...
+var greet = function (name) {
+    return `Hello, ${name}!`;
+};
+
+// ... this
+var greet = (name) =&gt; {
+    return `Hello, ${name}!`;
+};
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Fat arrow functions</h2>
+                        <ul>
+                            <li>Why bother?</li>
+                            <li class="fragment">
+                                Javascript functions bind <span class="js-code">this</span> and <span class="js-code">arguments</span>
+                            </li>
+                            <li class="fragment">
+                                Arrow functions don't
+                            </li>
+                            <li class="fragment">
+                                <pre><code data-trim class="javascript">
+// Instead of this ...
+var values = keys.map(function (key) {
+    return this[key];
+}.bind(this));
+
+// ... this
+var values = keys.map(key =&gt; {
+    return this[key];
+});
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Fat arrow functions</h2>
+                        <ul>
+                            <li>Two forms:</li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// Block
+var values = keys.map(key =&gt; {
+    return this[key];
+});
+
+// Expression
+var values = keys.map(key =&gt; this[key]);
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Object shorthand</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// A lot of code looks like this
+var postBody = {
+    data: data,
+};
+
+// So instead you can do this
+var postBody = {data};
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Object shorthand</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// You've had to type this once or twice
+var package = {
+    doSomething: function doSomething() {
+        // ...
+    },
+};
+
+// Instead you can do this
+var package = {
+    doSomething() {
+        // ...
+    },
+};
+                                </code></pre>
+                            </li>
+                            <li class="fragment">This is partly enabled by new debugger semantics</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Object shorthand</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// You can't do this
+var key = 'hello';
+var value = 'world';
+var obj = { key: value }; // {"key":"value"}
+
+// In ES5 you have to do this
+var obj = {};
+obj[key] = value;
+
+// New syntax saves a line
+var obj = { [key]: value }; // {"hello":"world"}
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Classes</h2>
+                        <pre><code data-trim class="javascript">
+class Foo {
+    constructor() {
+        // ...
+    }
+    static create() {
+        // ...
+    }
+}
+
+class Bar extends Foo {
+    constructor() {
+        super();
+        // ...
+    }
+}
+                        </code></pre>
+                        <div class="fragment">
+                            <div style="position:fixed;left:0;top:0;right:0;bottom:0;background:url(./img/fireworks01.gif);background-size:contain"></div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Classes</h2>
+                        <h3>Caveats</h3>
+                        <ul>
+                            <li>
+                                Extremely thin wrapper over normal Javascript OOP
+                                <ul>
+                                    <li class="fragment">
+                                        Kind of like <span class="js-code">cc.Class</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="fragment">
+                                Only methods, no properties
+                                <ul>
+                                    <li class="fragment">
+                                        Proposal in ES7
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Destructuring assignment</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// Instead of this
+var name = values[0];
+var rank = values[1];
+var serialNumber = values[2];
+
+// Do this
+var [name, rank, serialNumber] = values;
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                Same as <span class="js-code">list</span> in PHP
+                                <pre><code data-trim class="php">
+list($name, $rank, $serialNumber) = $values;
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Destructuring assignment</h2>
+                        <ul>
+                            <li>
+                                Works with objects too
+                                <pre><code data-trim class="javascript">
+// Instead of this
+var name = this.name;
+var rank = this.rank;
+var serialNumber = this.serialNumber;
+
+// Do this
+var {name, rank, serialNumber} = this;
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                Similar to <span class="js-code">extract</span> in PHP
+                                <pre><code data-trim class="php">
+extract($values); // $name, $rank, $serialNumber
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Destructuring assignment</h2>
+                        <ul>
+                            <li>
+                                Works in function signatures
+                                <pre><code data-trim class="javascript">
+// More obvious which fields are used
+registerDispatchAction('loadAndPushPopup', function ({appName, viewSet, viewName, data}) {
+    // appName, viewSet, viewName, data are all variables here
+});
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                You can go deep. You can go overboard too
+                                <pre><code data-trim class="javascript">
+var {
+    characterID,
+    vip: {
+        points,
+        tier,
+    },
+} = character;
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>for-of loop</h2>
+                    <ul>
+                        <li>
+                            <pre><code data-trim class="javascript">
+var array = ['one', 'two', 'three'];
+for (var value of array) {
+    console.log(value); // one, two, three
+}
+
+// Different from for-in loop
+var obj = {one:1, two:2, three:3};
+for (var key in obj) {
+    console.log(key); // one, two, three
+}
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            Not yet optimized in current engines. Stay tuned
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>let and const</h2>
+                        <ul>
+                            <li><span class="js-code">var</span> is not good</li>
+                            <li>
+                                <span class="js-code">let</span> and <span class="js-code">const</span> are better
+                                <pre><code data-trim class="javascript">
+(function () {
+    const value = 'outer';
+    if (true) {
+        let value = 'inner';
+        console.log(value); // inner
+    }
+    console.log(value); // outer
+}());
+                                </code></pre>
+                            </li>
+                            <li class="fragment">Block scoping at last!</li>
+                        </ul>
+                        <div class="fragment">
+                            <div style="position:fixed;left:0;top:0;right:0;bottom:0;background:url(./img/fireworks01.gif);background-size:contain"></div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>let and const</h2>
+                        <ul>
+                            <li>Works well with for-of loop</li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+for (const value of array) {
+    console.log(value);
+}
+                                </code></pre>
+                            </li>
+                            <li class="fragment">No need for <span class="js-code">_.forEach</span></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Maps and Sets</h2>
+                        <pre><code data-trim class="javascript">
+var map = new Map;
+map.set('true', 'string');
+map.set(true, 'boolean');
+console.log(map.get(true)); // boolean
+
+var set = new Set;
+set.add(12);
+set.add('hello');
+set.add(12); // duplicate
+console.log(set.size()); // 2
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Maps and Sets</h2>
+                        <h3>WeakMaps and WeakSets</h3>
+                        <ul>
+                            <li>Don't maintain references for gc purposes</li>
+                            <li>Non-enumerable</li>
+                            <li>Keys must be objects</li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+var map = new WeakMap;
+const obj = {};
+map.set(obj, 'first');
+map.set({}, 'second');
+console.log(map.get(obj)); // first
+
+var set = new Set;
+set.add(obj);
+set.add({});
+console.log(set.has(obj)); // true
+console.log(set.has({})); // false
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>import and export</h2>
+                    <pre><code data-trim class="javascript">
+import Hello from './places/World';
+import {CasinoCharacter as JPCCharacter} from 'sakit/models';
+
+export const SAPackage = {
+    doSomething() {
+        // ...
+    },
+};
+                    </code></pre>
+                </section>
+
+                <!-- default args -->
+                <!-- rest and spread -->
+
+                <section>
+                    <h1>Cool Stuff You Might Not See Right Away</h1>
+                </section>
+
+                <section>
+                    <h2>Proxy</h2>
+                </section>
+
+                <section>
+                    <h2>Generators</h2>
+                </section>
+
+				<section>
+					<h1>Questions?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
