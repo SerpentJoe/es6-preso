@@ -1,44 +1,44 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-		<title>ES6: Slings And Fat Arrows</title>
+        <title>ES6</title>
 
-		<meta name="description" content="ES6 basics">
-		<meta name="author" content="Peter Jones">
+        <meta name="description" content="ES6 basics">
+        <meta name="author" content="Peter Jones">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="shortcut icon" href="favicon.gif">
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <link rel="shortcut icon" href="./img/favicon.gif">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
 
-	<body>
-		<div class="reveal">
+    <body>
+        <div class="reveal">
             <style>
                 .reveal abbr {
                     border-bottom : 1px dashed rgb(127, 255, 127);
@@ -65,32 +65,35 @@
                 .reveal code {
                     min-width : 720px;
                 }
+                .reveal .fireworks {
+                    position : fixed;
+                    left : 0;
+                    top : 0;
+                    right : 0;
+                    bottom : 0;
+                    background : url(./img/fireworks01.gif);
+                    background-size : contain;
+                }
             </style>
 
-            <!--
-            OUTLINE
+            <div class="slides">
+                <section>
+                    <h1>ES6</h1>
+                    <h3>Better than PHP 6</h3>
+                    <p>
+                        <small>Peter Jones for Big Fish Games</small>
+                    </p>
+                </section>
 
-            
-            -->
-
-			<div class="slides">
-				<section>
-					<h1>ES6</h1>
-					<h3>Slings And Fat Arrows</h3>
-					<p>
-						<small>Peter Jones for Big Fish Games</small>
-					</p>
-				</section>
-
-				<section>
-					<h2>What is ES6?</h2>
-					<ul>
+                <section>
+                    <h2>What is ES6?</h2>
+                    <ul>
                         <li>
                             The ECMAScript version after 5
-                            <ul>
-                                <li class="fragment">'use strict';</li>
-                                <li class="fragment">Object.defineProperty</li>
-                                <li class="fragment">JSON.parse</li>
+                            <ul class="fragment">
+                                <li>'use strict';</li>
+                                <li>Object.defineProperty</li>
+                                <li>JSON.parse</li>
                             </ul>
                         </li>
                         <li class="fragment">
@@ -99,8 +102,8 @@
                         <li class="fragment">
                             Blame Microsoft
                         </li>
-					</ul>
-				</section>
+                    </ul>
+                </section>
 
                 <section>
                     <h2>ES6 contains three types of changes</h2>
@@ -120,20 +123,30 @@
                 <section>
                     <h2>Things ES6 does not contain</h2>
                     <ul>
-                        <li>
-                            Types
-                        </li>
-                        <li>
-                            Interfaces
-                        </li>
+                        <li>Types</li>
+                        <li>Interfaces</li>
                     </ul>
                 </section>
 
-				<section>
-					<h1>Things you'll see a lot</h1>
-				</section>
+                <section>
+                    <h1>Things you'll see a lot</h1>
+                </section>
 
-				<section>
+                <section>
+                    <h2>Promises</h2>
+                </section>
+
+                <section>
+                    <h2>New methods</h2>
+                    <pre><code data-trim class="javascript">
+'hello world'.includes('hello'); // true
+[5, 10, 17].find(function (x) { return (x % 5); }); // 17
+Array.from(document.querySelectorAll('*')); // Actual array
+Object.assign({first:1}, {second:2}); // {"first":1, "second":2}
+                    </code></pre>
+                </section>
+
+                <section>
                     <section>
                         <h2>Template strings</h2>
                         <ul>
@@ -183,6 +196,11 @@ function greet(names) {
                             </li>
                         </ul>
                     </section>
+
+                    <section>
+                        <h2>Template strings</h2>
+                        Also, tags!
+                    </section>
                 </section>
 
                 <section>
@@ -214,8 +232,6 @@ var greet = (name) =&gt; {
                             </li>
                             <li class="fragment">
                                 Arrow functions don't
-                            </li>
-                            <li class="fragment">
                                 <pre><code data-trim class="javascript">
 // Instead of this ...
 var values = keys.map(function (key) {
@@ -248,6 +264,23 @@ var values = keys.map(key =&gt; this[key]);
                             </li>
                         </ul>
                     </section>
+
+                    <section>
+                        <h2>Fat arrow functions</h2>
+                        <h3>One more example</h3>
+                        <pre><code data-trim class="javascript">
+    // ...
+    doSomething: function doSomething() {
+        return this._doAsyncStep()
+            .then((resp) =&gt; (
+                _.map(resp.propNames, (prop) =&gt; (
+                    this[prop]
+                ))
+            ));
+    },
+    // ...
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section>
@@ -273,7 +306,7 @@ var postBody = {data};
                         <ul>
                             <li>
                                 <pre><code data-trim class="javascript">
-// You've had to type this once or twice
+// You've had to type this once or twice by now
 var package = {
     doSomething: function doSomething() {
         // ...
@@ -335,7 +368,7 @@ class Bar extends Foo {
 }
                         </code></pre>
                         <div class="fragment">
-                            <div style="position:fixed;left:0;top:0;right:0;bottom:0;background:url(./img/fireworks01.gif);background-size:contain"></div>
+                            <div class="fireworks"></div>
                         </div>
                     </section>
 
@@ -483,7 +516,7 @@ for (var key in obj) {
                             <li class="fragment">Block scoping at last!</li>
                         </ul>
                         <div class="fragment">
-                            <div style="position:fixed;left:0;top:0;right:0;bottom:0;background:url(./img/fireworks01.gif);background-size:contain"></div>
+                            <div class="fireworks"></div>
                         </div>
                     </section>
 
@@ -514,8 +547,8 @@ console.log(map.get(true)); // boolean
 
 var set = new Set;
 set.add(12);
-set.add('hello');
 set.add(12); // duplicate
+set.add('hello');
 console.log(set.size()); // 2
                         </code></pre>
                     </section>
@@ -526,6 +559,7 @@ console.log(set.size()); // 2
                         <ul>
                             <li>Don't maintain references for gc purposes</li>
                             <li>Non-enumerable</li>
+                            <li>Can't check size</li>
                             <li>Keys must be objects</li>
                             <li>
                                 <pre><code data-trim class="javascript">
@@ -537,7 +571,6 @@ console.log(map.get(obj)); // first
 
 var set = new Set;
 set.add(obj);
-set.add({});
 console.log(set.has(obj)); // true
 console.log(set.has({})); // false
                                 </code></pre>
@@ -560,61 +593,217 @@ export const SAPackage = {
                     </code></pre>
                 </section>
 
-                <!-- default args -->
-                <!-- rest and spread -->
+                <section>
+                    <h2>Default params</h2>
+                    <ul>
+                        <li>
+                            <pre><code data-trim class="javascript">
+function greet(name='world') {
+    return `Hello ${name}!`;
+}
+
+console.log(greet()); // "Hello world!"
+console.log(greet(null)); // "Hello null!"
+console.log(greet(undefined)); // "Hello world!"
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
 
                 <section>
-                    <h1>Cool Stuff You Might Not See Right Away</h1>
+                    <section>
+                        <h2>Rest and spread</h2>
+                        <ul>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// Rest
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log(JSON.stringify(rest)); // [3, 4, 5]
+
+// Spread
+const foo = [...rest, true, false];
+console.log(JSON.stringify(foo)); // [3, 4, 5, true, false]
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                Rest helps with handling varargs
+                                <pre><code data-trim class="javascript">
+function foo(...args) {
+    console.log(args);
+}
+                                </code></pre>
+                            </li>
+                            <li class="fragment">
+                                Spread helps with sending varargs
+                                <pre><code data-trim class="javascript">
+const bar = ['hello', 'world'];
+foo(...bar); // ['hello', 'world']
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Rest and spread</h2>
+                        <ul>
+                            <li>Not in ES6: Object rest and spread</li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// Rest
+const {hello, ...rest} = {hello:'world', goodnight:'moon'};
+console.log(JSON.stringify(rest)); // {"goodnight":"moon"}
+
+// Spread
+const oldState = {
+    hello: 'world',
+    goodnight: 'moon',
+};
+const newState = {
+    ...oldState, // spread
+    goodnight: 'and good luck',
+};
+console.log(newState); // {"hello":"world", "goodnight":"and good luck"}
+                                </code></pre>
+                            </li>
+                            <li>Proposal in ES7</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>Less Common Features</h1>
                 </section>
 
                 <section>
                     <h2>Proxy</h2>
+                    <ul>
+                        <li>
+                            Object.defineProperty lets you dynamically respond to property accesses if you've prepared in advance
+                        </li>
+                        <li>
+                            Proxy gives you superpowers
+                        </li>
+                        <li>
+                            <pre><code data-trim class="javascript">
+const obj = new Proxy({}, {
+    set(tgt, prop, value) {
+        console.log(`this.${prop} = ${JSON.stringify(value)`);
+    },
+});
+
+obj.hello = 'world'; // this.hello = "world"
+                            </code></pre>
+                        </li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h2>Generators</h2>
+                    <section>
+                        <h2>Generators</h2>
+                        <ul>
+                            <li>
+                                Lazily created sequences
+                            </li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+function* range(begin, end) {
+    for (let curr=begin; curr!==end; curr++) {
+        yield curr;
+    }
+}
+
+for (const curr of range(2, 5)) {
+    console.log(curr); // 2, 3, 4
+}
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Generators</h2>
+                        <ul>
+                            <li>Enables new async patterns</li>
+                            <li>
+                                <pre><code data-trim class="javascript">
+// ...
+loadLayout: Promise.coroutine(function* (gameType, viewSet, viewName) {
+    const layout = yield this._fetchLayout(gameType, viewSet, viewName);
+    const assetsToFetch = this._getAssetsToLoad(layout);
+    const assets = yield this._fetchAssets(assetsToFetch);
+    return {layout, assets};
+}),
+// ...
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
                 </section>
 
-				<section>
-					<h1>Questions?</h1>
-				</section>
+                <section>
+                    <h2>Symbols</h2>
+                    <ul>
+                        <li>Object keys that never overlap</li>
+                        <li>
+                            <pre><code data-trim class="javascript">
+const obj = {
+    [Symbol('foo')]: 1,
+    [Symbol('foo')]: 2,
+    [Symbol('foo')]: 3,
+};
+console.log(Object.getOwnPropertySymbols(obj).length); // 3
+console.log(obj[Symbol('foo')]); // undefined
+                            </code></pre>
+                        </li>
+                        <li class="fragment">
+                            The seventh type!
+                            <pre><code data-trim class="javascript">
+console.log(typeof Symbol('hello world')); // symbol
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
 
-			</div>
+                <section>
+                    <h1>Questions?</h1>
+                </section>
 
-		</div>
+            </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+        </div>
 
-		<script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        <script>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
 
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
 
-		</script>
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
 
-	</body>
+        </script>
+
+    </body>
 </html>
