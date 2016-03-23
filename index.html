@@ -73,13 +73,14 @@
                     bottom : 0;
                     background : url(./img/fireworks01.gif);
                     background-size : contain;
+                    pointer-events : none;
                 }
             </style>
 
             <div class="slides">
                 <section>
                     <h1>ES6</h1>
-                    <h3>Better than PHP 6</h3>
+                    <h3 class="fragment">Better than PHP 6</h3>
                     <p>
                         <small>Peter Jones for Big Fish Games</small>
                     </p>
@@ -333,7 +334,7 @@ var package = {
 // You can't do this
 var key = 'hello';
 var value = 'world';
-var obj = { key: value }; // {"key":"value"}
+var obj = { key: value }; // {"key":"world"}
 
 // In ES5 you have to do this
 var obj = {};
@@ -500,7 +501,7 @@ for (var key in obj) {
                         <h2>let and const</h2>
                         <ul>
                             <li><span class="js-code">var</span> is not good</li>
-                            <li>
+                            <li class="fragment">
                                 <span class="js-code">let</span> and <span class="js-code">const</span> are better
                                 <pre><code data-trim class="javascript">
 (function () {
@@ -675,29 +676,6 @@ console.log(newState); // {"hello":"world", "goodnight":"and good luck"}
                 </section>
 
                 <section>
-                    <h2>Proxy</h2>
-                    <ul>
-                        <li>
-                            Object.defineProperty lets you dynamically respond to property accesses if you've prepared in advance
-                        </li>
-                        <li>
-                            Proxy gives you superpowers
-                        </li>
-                        <li>
-                            <pre><code data-trim class="javascript">
-const obj = new Proxy({}, {
-    set(tgt, prop, value) {
-        console.log(`this.${prop} = ${JSON.stringify(value)`);
-    },
-});
-
-obj.hello = 'world'; // this.hello = "world"
-                            </code></pre>
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
                     <section>
                         <h2>Generators</h2>
                         <ul>
@@ -759,6 +737,44 @@ console.log(obj[Symbol('foo')]); // undefined
                             The seventh type!
                             <pre><code data-trim class="javascript">
 console.log(typeof Symbol('hello world')); // symbol
+                            </code></pre>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Tail Call Optimization</h2>
+                    <ul>
+                        <li>
+                            Improves recursive function performance
+                        </li>
+                        <li>
+                            Requires deprecating some dynamic features (this is why we don't use <span class="js-code">arguments.callee</span>)
+                        </li>
+                        <li class="fragment">
+                            Useful?
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Proxy</h2>
+                    <ul>
+                        <li>
+                            Object.defineProperty lets you dynamically respond to property accesses if you've prepared in advance
+                        </li>
+                        <li>
+                            Proxy gives you superpowers
+                        </li>
+                        <li>
+                            <pre><code data-trim class="javascript">
+const obj = new Proxy({}, {
+    set(tgt, prop, value) {
+        console.log(`this.${prop} = ${JSON.stringify(value)`);
+    },
+});
+
+obj.hello = 'world'; // this.hello = "world"
                             </code></pre>
                         </li>
                     </ul>
